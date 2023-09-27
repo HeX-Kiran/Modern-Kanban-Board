@@ -1,0 +1,138 @@
+@import url("general.css");
+
+.kanban{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    width: 100vw;
+    height: 100vh;
+}
+
+.side-bar{
+    background-color: var(--side-bar-bg);
+}
+
+.container{
+    
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    height: 100vh;
+
+}
+
+.side-user{
+    width: 100%;
+    display: flex;
+    align-items: center;
+   justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+ion-icon[name="person-outline"]{
+    font-size: 2.2rem;
+    color: white;
+}
+ion-icon[name="logo-google-playstore"]{
+    font-size: 2.2rem;
+    /* color: white; */
+}
+
+.add-delete{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #ffffff1f;
+}
+
+
+
+.add-task:link,
+.add-task:visited{
+    text-align: center;
+    color: var(--main-text-color);
+    background-color: #7F55D6;
+    border-radius: 10px;
+    padding: 1rem ;
+    text-decoration: none;
+}
+
+.stages{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+    padding-bottom: 3rem;
+   
+}
+
+.stages-heading{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.different-stages{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+.stage{
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+.indicator{
+    height: 10px;
+    width: 15px;
+   border-radius: 10px;
+} 
+
+.red{
+    background-color: red;
+}
+
+.blue{
+    background-color: lightblue;
+}
+
+.yellow{
+    background-color: #F3EF8B;
+}
+
+.green{
+    background-color: greenyellow;
+}
+
+.stage p{
+    font-size: 1.2rem;
+    color: var(--main-text-color);
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.help{
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid #ffffff1f;
+}
+
+
+.main-body{
+    
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOUT - DAILY PLANNER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/queries.css">
+    <script defer src="javascript/script.js"></script>
+</head>
+<body>
+   <section>
+        <div class="kanban">
+            <!-- Side Bar -->
+            <div class="side-bar">
+                <div class="container">
+                    <!-- Account icon -->
+                    <div class="side-user">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <ion-icon name="logo-google-playstore"></ion-icon>
+                    </div>
+                    <div class="add-delete">
+                        <!-- Add Task Button -->
+                        <a href="#" class="add-task teritory-heading">Add Task</a>
+
+                        <!-- Add Delete Button -->
+                        <a href="#" class="add-task teritory-heading" id="delete">Delete</a>
+                    </div>
+                    
+                    <div class="stages">
+                        <!-- Stage -heading -->
+                        <div class="stages-heading">
+                            <h1 class="teritory-heading">Stages</h1>
+                            <ion-icon name="add-outline" id="icon"></ion-icon>
+                        </div>
+
+                        <!-- different stages -->
+                        <div class="different-stages">
+                            <div class="stage">
+                                <!-- Not Started -->
+                                <div class="indicator red"></div>
+                                <p>Not Started</p>
+                            </div>
+                                <!--In Progress -->
+                            <div class="stage">
+                                <div class="indicator blue"></div>
+                                <p>In Progress</p>
+                            </div>  
+                            <!-- Testing -->
+                            <div class="stage">
+                                <div class="indicator yellow"></div>
+                                <p>Testing</p>
+                            </div>
+                            <!-- Completed -->
+                            <div class="stage">
+                                <div class="indicator green"></div>
+                                <p>Completed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                        <!-- Help and FeedBack -->
+                        <div class="help">
+                            <ion-icon name="help-buoy-outline" id="icon"></ion-icon>
+                            <p class="other-heading">Help & Feedbacks</p>
+                        </div>
+                </div>
+            </div>
+            <!-- Main Content -->
+            <div class="main-body">
+
+            </div>
+        </div>
+   </section>
+    
+
+   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
