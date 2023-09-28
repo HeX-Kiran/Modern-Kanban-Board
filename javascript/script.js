@@ -55,11 +55,21 @@ let links = document.querySelectorAll(".tasks-nav-link a");
 console.log(links);
 
 links.forEach(link=>{
-    link.addEventListener("click",()=>{
-        // 
+    link.addEventListener("click",(e)=>{
+        
         if(category.has(link.innerText)){
             //   iterate over appropriate Array and display those elements
+           
         }
+        else{
+            link.setAttribute("id","");
+        }
+
+        // Whenever a filter is pressed the other filter should not have selected id
+        links.forEach(link=>{
+            if(link === e.target) link.setAttribute("id","selected");
+            else link.setAttribute("id"," ");
+        })
     })
 })
 

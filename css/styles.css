@@ -6,6 +6,7 @@
     width: 100vw;
     height: 100vh;
     position: relative;
+    
 }
 
 .side-bar{
@@ -181,6 +182,8 @@ ion-icon[name="logo-google-playstore"]{
 
 
 .tasks-nav-link{
+    flex-wrap: wrap;
+    gap: 2rem;
     padding-left: 10px;
     width: 50%;
     list-style: none;
@@ -196,10 +199,10 @@ ion-icon[name="logo-google-playstore"]{
 }
 
 .task-section{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 1rem;
+    gap: 1rem; */
 }
 
 .task-heading{
@@ -217,6 +220,14 @@ ion-icon[name="logo-google-playstore"]{
 .task-heading #icon{
     font-size: 2.4rem;
     color: var(--main-text-color);
+}
+
+.add-cards{
+    margin-top: 20px;
+     display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
 }
 
 .cards{
