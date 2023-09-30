@@ -96,6 +96,7 @@
     .add-cards{
         flex-direction: column;
         align-items: center;
+        /* justify-content: start; */
     }
     
     .cards{
@@ -140,9 +141,13 @@
     
 
     
-.task-heading h1 {
-    
-    font-size: 2.2rem;
-}
+    .task-heading h1 {
+        
+        font-size: 2.2rem;
+    }
+
+    .form{
+        min-width: 300px;
+    }
 }
  /*************************************************************** */
