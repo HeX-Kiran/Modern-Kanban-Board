@@ -106,6 +106,7 @@ body{
 
 #show{
     display: flex;
+    flex-wrap: wrap;
 }
 
 
