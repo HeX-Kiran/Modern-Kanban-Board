@@ -36,8 +36,15 @@ let completedCard = document.querySelector(".cards[category = '4']");
 
 let currObj = {};
 
+let editFlag = false;
+let editFlagCategory = 1;
+let editCode = null;
+let editCard = null;
+
+
 let saveButton = document.querySelector(".save");
 
+let formTitle = document.querySelector(".form-title h1");
 let closeForm = document.querySelector(".form-close");
 let formInput = document.querySelector(".form input");
 let textArea = document.querySelector(".form textArea");
@@ -55,17 +62,19 @@ saveButton.addEventListener("click",(e)=>{
     currObj.desc = desc;
     currObj.code = Date.now();
 
-    console.log(currObj)
+    console.log("entered save button")
+    // console.log(currObj)
     
     if(currObj.category == 1){
         notStartedArr.push(currObj);
         currObj = {};
-
+        console.log("entered not started section");
         // After pushing clone create a respective card using clone
         createCard(notStartedArr[notStartedArr.length-1].title,notStartedArr[notStartedArr.length-1].desc,notStartedArr[notStartedArr.length-1].category,notStartedArr[notStartedArr.length-1].code);
 
     } 
     else if(currObj.category == 2){
+        console.log("entered progress section");
         inProgressArr.push(currObj);
         currObj={};
         // After pushing clone create a respective card using clone
@@ -73,16 +82,35 @@ saveButton.addEventListener("click",(e)=>{
     }
 
     else if(currObj.category == 3){
+        console.log("entered testing section");
         testingArr.push(currObj);
         currObj = {};
         // After pushing clone create a respective card using clone
         createCard(testingArr[testingArr.length-1].title,testingArr[testingArr.length-1].desc,testingArr[testingArr.length-1].category,testingArr[testingArr.length-1].code);
     }
-    else{
+    else if(currObj.category === 4){
+        console.log("entered completed section");
         completedArr.push(currObj);
         currObj={};
         // After pushing clone create a respective card using clone
         createCard(completedArr[completedArr.length-1].title,completedArr[completedArr.length-1].desc,completedArr[completedArr.length-1].category,completedArr[completedArr.length-1].code);
+    }
+    else if(editFlag){
+        currObj ={} 
+        let arr = arrayMap.get(editFlagCategory);
+        arr.forEach(obj=>{
+            if(obj.code === editCode){
+                obj.title = title;
+                obj.desc = desc;
+                createCard(obj.title,obj.desc,obj.category,obj.code);
+                console.log(obj.code);
+            }
+        })
+        
+        formTitle.innerText = "Add Task"
+        editFlag = false;
+        editCard.remove();
+        
     }
 
     // console.log(notStartedArr);
@@ -105,7 +133,7 @@ let form = document.querySelector(".task-form");
 addTask.addEventListener("click",()=>{
     form.style.display = "block";
     currObj.category = 1
-    console.log(currObj);
+    // console.log(currObj);
 })
 // *************************************************************
 // Progress Add button
@@ -115,7 +143,7 @@ let progressAdd = document.querySelector("#icon[category='2']");
 progressAdd.addEventListener("click",()=>{
     form.style.display = "block";
     currObj.category = 2
-    console.log(currObj);
+    // console.log(currObj);
     
     
 })
@@ -127,7 +155,7 @@ let testingAdd = document.querySelector("#icon[category='3']");
 testingAdd.addEventListener("click",()=>{
     form.style.display = "block";
     currObj.category = 3
-    console.log(currObj);
+    // console.log(currObj);
     
     
 })
@@ -140,7 +168,7 @@ let completedAdd = document.querySelector("#icon[category='4']");
 completedAdd.addEventListener("click",()=>{
     form.style.display = "block";
     currObj.category = 4
-    console.log(currObj);
+    // console.log(currObj);
     
     
 })
@@ -148,6 +176,10 @@ completedAdd.addEventListener("click",()=>{
 // **************************************************************
 // Close Task Form
     closeForm.addEventListener("click",()=>{
+        if(editButton){
+            formTitle.innerText = "Add Task";
+            formTitle.style.justifySelf = "end"
+        } 
         form.style.display = "none";
         // If we are closing we need to clear input fields
         formInput.value = "";
@@ -162,18 +194,41 @@ completedAdd.addEventListener("click",()=>{
 // Adding filter capability
 let links = document.querySelectorAll(".tasks-nav-link a");
 
-console.log(links);
+// console.log(links);
 
 links.forEach(link=>{
     link.addEventListener("click",(e)=>{
+        let taskCategory = category.get(link.innerText);
+        let taskSection = document.querySelectorAll(".task-section");
         
-        if(category.has(link.innerText)){
+        if(taskCategory === 0){
+            //do nothing ie show every section
+            taskSection.forEach(section=>{
+                section.style.display = "block"
+            })
+        }
+        else if(category.has(link.innerText)){
             //   iterate over appropriate Array and display those elements
-           
+           //select the task section
+            
+            console.log(taskSection)
+            taskSection.forEach(section=>{
+                if(section.getAttribute("category") == taskCategory){
+                    //do nothing
+                    section.style.display = "block"
+                }
+                else{
+                    section.style.display = "none"
+                }
+            })
         }
-        else{
-            link.setAttribute("id","");
-        }
+
+        // if(category.has(link.innerText)){
+            
+        // }
+        // else{
+        //     link.setAttribute("id","");
+        // }
 
         // Whenever a filter is pressed the other filter should not have selected id
         links.forEach(link=>{
@@ -225,7 +280,9 @@ function cloneCards(card,title,desc,category,code,section){
         })
 
         editBtn.addEventListener("click",()=>{
-            editButton(title,desc,code)
+            console.log(code);
+            editButton(title,desc,code,category,newCard);
+            
         })
 }
 
@@ -246,11 +303,23 @@ function deleteCard(category,code){
 // **************************************************
 // edit Button for respective cards function
 
-function editButton(title,desc,code){
+function editButton(title,desc,code,category,card){
+    editFlag = true;
+    editFlagCategory =category;
+    editCode = code;
+    editCard = card;
+
+    if(editFlag){
+        formTitle.innerText = "Edit";
+        formTitle.style.justifySelf = "center"
+    }
     form.style.display = "flex";
     formInput.value = title
     textArea.value = desc;
 
+    console.log(editFlag);
+    console.log(editFlagCategory);
+    console.log(editCode);
 }
 
 

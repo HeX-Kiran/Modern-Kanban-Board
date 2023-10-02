@@ -234,7 +234,6 @@ ion-icon[name="logo-google-playstore"]{
 
 .cards{
     min-width: 300px;
-    
     background-color: var(--side-bar-bg);
     color: white;
     display: none;
