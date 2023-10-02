@@ -31,6 +31,9 @@
         grid-template-columns: 1fr;
     }
 
+    .side-bar{
+        height: 70px;
+    }
     
     .container{
         padding: 10px;
