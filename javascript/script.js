@@ -20,6 +20,12 @@ arrayMap.set(2,inProgressArr);
 arrayMap.set(3,testingArr);
 arrayMap.set(4,completedArr);
 
+let arrayNameMap = new Map();
+arrayNameMap.set(1,"notStartedArr");
+arrayNameMap.set(2,"inProgressArr");
+arrayNameMap.set(3,"testingArr");
+arrayNameMap.set(4,"completedArr");
+
 // Select the add card and card div for each category
 let notStartedSection = document.querySelector(".add-cards[category='1']");
 let notStartedCard = document.querySelector(".cards[category='1']");
@@ -67,6 +73,7 @@ saveButton.addEventListener("click",(e)=>{
     
     if(currObj.category == 1){
         notStartedArr.push(currObj);
+       localStorage.setItem("notStartedArr",JSON.stringify(notStartedArr));
         currObj = {};
         console.log("entered not started section");
         // After pushing clone create a respective card using clone
@@ -76,6 +83,7 @@ saveButton.addEventListener("click",(e)=>{
     else if(currObj.category == 2){
         console.log("entered progress section");
         inProgressArr.push(currObj);
+        localStorage.setItem("inProgressArr",JSON.stringify(inProgressArr));
         currObj={};
         // After pushing clone create a respective card using clone
         createCard(inProgressArr[inProgressArr.length-1].title,inProgressArr[inProgressArr.length-1].desc,inProgressArr[inProgressArr.length-1].category,inProgressArr[inProgressArr.length-1].code);
@@ -84,6 +92,7 @@ saveButton.addEventListener("click",(e)=>{
     else if(currObj.category == 3){
         console.log("entered testing section");
         testingArr.push(currObj);
+        localStorage.setItem("testingArr",JSON.stringify(testingArr));
         currObj = {};
         // After pushing clone create a respective card using clone
         createCard(testingArr[testingArr.length-1].title,testingArr[testingArr.length-1].desc,testingArr[testingArr.length-1].category,testingArr[testingArr.length-1].code);
@@ -91,6 +100,7 @@ saveButton.addEventListener("click",(e)=>{
     else if(currObj.category === 4){
         console.log("entered completed section");
         completedArr.push(currObj);
+        localStorage.setItem("completedArr",JSON.stringify(completedArr));
         currObj={};
         // After pushing clone create a respective card using clone
         createCard(completedArr[completedArr.length-1].title,completedArr[completedArr.length-1].desc,completedArr[completedArr.length-1].category,completedArr[completedArr.length-1].code);
@@ -106,6 +116,7 @@ saveButton.addEventListener("click",(e)=>{
                 console.log(obj.code);
             }
         })
+        localStorage.setItem(`${arrayNameMap.get(editFlagCategory)}`,JSON.stringify(arr))
         
         formTitle.innerText = "Add Task"
         editFlag = false;
@@ -292,12 +303,15 @@ function cloneCards(card,title,desc,category,code,section){
 function deleteCard(category,code){
    
    let arr =  arrayMap.get(category);
+   console.log(arr);
    arr.forEach((obj,index)=>{
     if(obj.code === code){
         arr.splice(index,1);
         console.log("Deleted" + code);
     } 
    })
+   console.log(`${arrayNameMap.get(category)}`,JSON.stringify(arr))
+   localStorage.setItem(`${arrayNameMap.get(category)}`,JSON.stringify(arr));
 }
 
 // **************************************************
@@ -321,6 +335,27 @@ function editButton(title,desc,code,category,card){
     console.log(editFlagCategory);
     console.log(editCode);
 }
+
+
+//Main function to add all element when page restart
+
+//Storing the values of each array from the local storage and display it
+for(let i = 1; i<=4;i++){
+    let arr = JSON.parse(localStorage.getItem(arrayNameMap.get(i)));
+    // console.log(arr,arr.length)
+    let arr1 = arrayMap.get(i);
+    if(arr){
+        for(let j = 0 ;j<arr.length;j++){
+            arr1.push(arr[j]);
+            createCard(arr[j].title,arr[j].desc,i,arr[j].code)
+        }
+    }
+}
+
+console.log(notStartedArr,inProgressArr,testingArr,completedArr)
+
+
+
 
 
 

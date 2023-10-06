@@ -233,7 +233,7 @@ ion-icon[name="logo-google-playstore"]{
 }
 
 .cards{
-    min-width: 300px;
+    min-width: 275px;
     background-color: var(--side-bar-bg);
     color: white;
     display: none;
